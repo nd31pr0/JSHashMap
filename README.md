@@ -30,5 +30,5 @@ Working with HashMaps in JS
 [JavaScript]
 * [Eleventh Project - Linked List](https://github.com/nd31pr0/JSLinkedLists)
 [JavaScript]
-* [Twelveth Project - HashedMap]
+* [Twelveth Project - HashedMap](https://github.com/nd31pr0/JSHashMap)
 [JavaScript]
