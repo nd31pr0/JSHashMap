@@ -57,6 +57,17 @@ class Hashmap {
         }
         return false;
     }
-
+    remove(key){
+        const index = this.hash(key);
+        const bucket = this.buckets[index]
+        for (let i=0; i<bucket.length; i++) {
+            if (bucket[i][0] === key) {
+                bucket.splice(i, 1) // remove 1 item starting from i
+                this.size--;
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
