@@ -69,5 +69,11 @@ class Hashmap {
         }
         return false;
     }
-
+    length() {
+        return this.size;
+    }
+    clear(){
+        this.buckets = Array.from({ length: this.buckets.length }, () => []); // Reset buckets
+        this.size = 0; // Reset size to 0
+    }
 }
