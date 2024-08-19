@@ -76,4 +76,13 @@ class Hashmap {
         this.buckets = Array.from({ length: this.buckets.length }, () => []); // Reset buckets
         this.size = 0; // Reset size to 0
     }
+    keys(){
+        const allKeys = [];
+        for(const bucket of this.buckets){
+            for(const key of bucket){ // get each bucket's key
+                allKeys.push(key); // push the key to the allkeys array
+            }
+        }
+        return allKeys;
+    }
 }
