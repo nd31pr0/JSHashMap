@@ -1,7 +1,8 @@
 class Hashmap {
-    constructor(size = 16){
+    constructor(size = 16, loadFactor = 0.75){
         this.size = size; // Size of the hash table
         this.bucket = new Array(this.size); // Array to hold the buckets
+        this.loadFactor = loadFactor;
     }
     // hash function takes a key and produces a hash code
     hash(key) {
