@@ -94,4 +94,13 @@ class Hashmap {
         }
         return allValues;
     }
+    entries(){
+        const allEntries = [];
+        for(const bucket of this.buckets){
+            for (const [key, value] of bucket){
+                allEntries.push([key, value]);
+            }
+        }
+        return allEntries;
+    }
 }
