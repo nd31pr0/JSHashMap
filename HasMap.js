@@ -34,7 +34,29 @@ class Hashmap {
             this._resize();
         }
     }
+    // Get method to retrieve values by key
+    get(key) {
+        const index = this._hash(key);
+        const bucket = this.buckets[index];
 
+        for (const [k, v] of bucket) {
+            if (k === key) {
+                return v; // Return the value if key is found
+            }
+        }
+        return null; // Return null if key is not found
+    }
+    // check if the hashmap has a particular key
+    has(key){
+        const index = this.hash(key);
+        const bucket = this.buckets[index];
+        for (const [k] of bucket){
+            if (k=== key) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }
