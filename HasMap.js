@@ -16,19 +16,23 @@ class Hashmap {
     } 
 
     set(key, value) {
-        const index = this.hash(key);
-        if (!this.table[index]) {
-            this.table[index] = []; // Create a bucket if it doesn't exist
-        }
-        // Check if the key already exists, and update the value
-        const bucket = this.table[index];
+        const index = this._hash(key);
+        const bucket = this.buckets[index];
+
         for (let i = 0; i < bucket.length; i++) {
             if (bucket[i][0] === key) {
-                bucket[i][1] = value; // Update existing key
+                bucket[i][1] = value; // Update value
                 return;
             }
         }
+
         bucket.push([key, value]); // Add new key-value pair
+        this.size++;
+
+        // Check load factor and resize if necessary
+        if (this.size / this.buckets.length > this.loadFactor) {
+            this._resize();
+        }
     }
 
 
