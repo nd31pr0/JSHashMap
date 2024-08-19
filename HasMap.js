@@ -85,4 +85,13 @@ class Hashmap {
         }
         return allKeys;
     }
+    values(){
+        const allValues = [];
+        for(const bucket of this.buckets){
+            for (const [, value] of bucket) {
+                allValues.push(value); // Collect each value
+            }
+        }
+        return allValues;
+    }
 }
