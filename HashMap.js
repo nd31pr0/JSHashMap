@@ -1,4 +1,4 @@
-class Hashmap {
+class HashMap {
     constructor(size = 16, loadFactor = 0.75){
         this.size = size; // Size of the hash table
         this.bucket = new Array(this.size); // Array to hold the buckets
@@ -17,7 +17,7 @@ class Hashmap {
     } 
 
     set(key, value) {
-        const index = this._hash(key);
+        const index = this.hash(key);
         const bucket = this.buckets[index];
 
         for (let i = 0; i < bucket.length; i++) {
@@ -105,3 +105,4 @@ class Hashmap {
         return allEntries;
     }
 }
+module.exports =  HashMap;

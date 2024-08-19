@@ -1,5 +1,5 @@
 const hashMap = require('./HashMap.js')
-const test = new hashMap(0.75);
+const test = new hashMap(16, 0.75);
 
 test.set('apple', 'red')
  test.set('banana', 'yellow')
@@ -13,3 +13,7 @@ test.set('apple', 'red')
  test.set('jacket', 'blue')
  test.set('kite', 'pink')
  test.set('lion', 'golden')
+
+ // Overiding should normally occur here since capacity is exceeded
+ test.set('LionColar', 'lionColor');
+ test.set('moon', 'silver')
