@@ -21,5 +21,15 @@ test.set('apple', 'red')
  test.print;
 
 // You can also test other methods
-console.log(`Value for 'name': ${test.get("banana")}`);
-console.log(`Does the map have 'apple'? ${test.has("gray")}`);
+console.log(`Value for 'banana': ${test.get("banana")}`);
+console.log(`Does the map have 'apple'? ${test.has("elephant")}`);
+console.log(`All keys in the hashmap are ${test.keys().join(', ')}`);
+console.log(`All values in the hashmap are ${test.values().join(', ')}`);
+
+// test remove function
+let keyToRemove =  'apple';
+if (test.remove(keyToRemove)) {
+    console.log(`The key "${keyToRemove}" has been removed.`);
+} else {
+    console.log(`The key "${keyToRemove}" was not found.`);
+}

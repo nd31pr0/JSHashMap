@@ -79,10 +79,9 @@ class HashMap {
     remove(key) {
         const index = this.hash(key);
         const bucket = this.buckets[index];
-
         for (let i = 0; i < bucket.length; i++) {
             if (bucket[i][0] === key) {
-                bucket.splice(i, 1); // Remove 1 item starting from i
+                bucket.splice(i, 1); // Remove the item
                 this.size--;
                 return true;
             }
@@ -99,6 +98,7 @@ class HashMap {
         this.size = 0; // Reset size to 0
     }
 
+    // get all keys from the hashmap
     keys() {
         const allKeys = [];
         for (const bucket of this.buckets) {
@@ -108,7 +108,7 @@ class HashMap {
         }
         return allKeys;
     }
-
+    // Get all values in hashmap
     values() {
         const allValues = [];
         for (const bucket of this.buckets) {
