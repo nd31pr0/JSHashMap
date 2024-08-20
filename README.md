@@ -30,7 +30,7 @@ Working with HashMaps in JS
 
 ## Sample Output of the work
 
-
+![output Img](imgs/output.png)
 
 ## The Odin Project (Web development) Completed projects
  
