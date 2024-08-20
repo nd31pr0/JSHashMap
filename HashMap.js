@@ -1,20 +1,34 @@
 class HashMap {
-    constructor(size = 16, loadFactor = 0.75){
-        this.size = size; // Size of the hash table
-        this.bucket = new Array(this.size); // Array to hold the buckets
+    constructor(size = 8, loadFactor = 0.75) {
+        this.size = 0; // Number of key-value pairs
+        this.buckets = Array.from({ length: size }, () => []); // Initialize buckets as empty arrays
         this.loadFactor = loadFactor;
     }
-    // hash function takes a key and produces a hash code
+
+    // Hash function takes a key and produces a hash code
     hash(key) {
         let hashCode = 0;
-           
         const primeNumber = 31;
+
         for (let i = 0; i < key.length; i++) {
-          hashCode = primeNumber * hashCode + key.charCodeAt(i);
+            hashCode = primeNumber * hashCode + key.charCodeAt(i);
         }
-     
-        return hashCode;
-    } 
+
+        return hashCode % this.buckets.length; // Ensure the index is within bounds
+    }
+
+    resize() {
+        const newSize = this.buckets.length * 2;
+        const newBuckets = Array.from({ length: newSize }, () => []);
+
+        for (const bucket of this.buckets) {
+            for (const [key, value] of bucket) {
+                const newIndex = this.hash(key); // Use the correct hash function
+                newBuckets[newIndex].push([key, value]);
+            }
+        }
+        this.buckets = newBuckets;
+    }
 
     set(key, value) {
         const index = this.hash(key);
@@ -32,13 +46,14 @@ class HashMap {
 
         // Check load factor and resize if necessary
         if (this.size / this.buckets.length > this.loadFactor) {
-            this._resize();
+            this.resize();
         }
     }
+
     // Get method to retrieve values by key
     get(key) {
-        const index = this._hash(key);
-        const bucket = this.buckets[index];
+        const index = this.hash(key);
+        const bucket = this.buckets[index]; // Corrected from this.bucket to this.buckets
 
         for (const [k, v] of bucket) {
             if (k === key) {
@@ -47,62 +62,72 @@ class HashMap {
         }
         return null; // Return null if key is not found
     }
-    // check if the hashmap has a particular key
-    has(key){
+
+    // Check if the hashmap has a particular key
+    has(key) {
         const index = this.hash(key);
-        const bucket = this.buckets[index];
-        for (const [k] of bucket){
-            if (k=== key) {
+        const bucket = this.buckets[index]; // Corrected from this.bucket to this.buckets
+
+        for (const [k] of bucket) {
+            if (k === key) {
                 return true;
             }
         }
         return false;
     }
-    remove(key){
+
+    remove(key) {
         const index = this.hash(key);
-        const bucket = this.buckets[index]
-        for (let i=0; i<bucket.length; i++) {
+        const bucket = this.buckets[index];
+
+        for (let i = 0; i < bucket.length; i++) {
             if (bucket[i][0] === key) {
-                bucket.splice(i, 1) // remove 1 item starting from i
+                bucket.splice(i, 1); // Remove 1 item starting from i
                 this.size--;
                 return true;
             }
         }
         return false;
     }
+
     length() {
         return this.size;
     }
-    clear(){
+
+    clear() {
         this.buckets = Array.from({ length: this.buckets.length }, () => []); // Reset buckets
         this.size = 0; // Reset size to 0
     }
-    keys(){
+
+    keys() {
         const allKeys = [];
-        for(const bucket of this.buckets){
-            for(const key of bucket){ // get each bucket's key
-                allKeys.push(key); // push the key to the allkeys array
+        for (const bucket of this.buckets) {
+            for (const [key] of bucket) { // Get each bucket's key
+                allKeys.push(key); // Push the key to the allKeys array
             }
         }
         return allKeys;
     }
-    values(){
+
+    values() {
         const allValues = [];
-        for(const bucket of this.buckets){
+        for (const bucket of this.buckets) {
             for (const [, value] of bucket) {
                 allValues.push(value); // Collect each value
             }
         }
         return allValues;
     }
-    entries(){
+
+    entries() {
         const allEntries = [];
-        for(const bucket of this.buckets){
-            for (const [key, value] of bucket){
+        for (const bucket of this.buckets) {
+            for (const [key, value] of bucket) {
                 allEntries.push([key, value]);
             }
         }
         return allEntries;
     }
 }
-module.exports =  HashMap;
+
+module.exports = HashMap;
