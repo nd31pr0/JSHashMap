@@ -17,3 +17,9 @@ test.set('apple', 'red')
  // Overiding should normally occur here since capacity is exceeded
  test.set('LionColar', 'lionColor');
  test.set('moon', 'silver')
+
+ test.print;
+
+// You can also test other methods
+console.log(`Value for 'name': ${test.get("banana")}`);
+console.log(`Does the map have 'apple'? ${test.has("gray")}`);
